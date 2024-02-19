@@ -9,9 +9,6 @@ Thumbs.db
 logs
 *.log
 
-# Environment variables
-.env
-
 # Build files
 /build
 
