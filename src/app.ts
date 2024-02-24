@@ -1,12 +1,12 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
+import router from "./routes";
 
 const app: Express = express();
-const port: number = 3000;
+const port: number = 3030;
 
-app.get("/", (req: Request, res: Response) => {
-  res.json({
-    message: "Hello Express + TypeScirpt!!",
-  });
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/api", router);
 
 app.listen(port, () => console.log(`Application is running on port ${port}`));
