@@ -1,7 +1,7 @@
 export interface IUser {
-  id: number;
+  id?: number;
   name: string;
   email: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
