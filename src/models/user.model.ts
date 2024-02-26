@@ -1,7 +1,12 @@
 export interface IUser {
   id?: number;
-  name: string;
   email: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  firstName: string;
+  lastName: string;
+  social: {
+    feacebook: string;
+    twitter: string;
+    github: string;
+    website: string;
+  };
 }

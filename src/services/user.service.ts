@@ -1,62 +1,63 @@
+import { IUserResponse } from "@/interfaces/IUserResponse";
 import { IUser } from "../models/user.model";
 import userRepository from "../repositories/user.repository";
 
-const getAllUsers = async () => {
+const getAllUsers = async (): Promise<IUserResponse<IUser[] | Error>> => {
   try {
-    const result = await userRepository.getAllUsers();
+    const result: IUser[] = await userRepository.getAllUsers();
     return {
       status: 200,
       data: result,
     };
-  } catch (error) {
+  } catch (error: unknown) {
     return {
       status: 500,
-      data: "error",
+      data: error as Error,
     };
   }
 };
 
-const createUser = async (user: IUser) => {
+const createUser = async (user: IUser): Promise<IUserResponse<IUser | Error>> => {
   try {
-    const result = await userRepository.createUser(user);
+    const result: IUser = await userRepository.createUser(user);
     return {
       status: 201,
       data: result,
     };
-  } catch (error) {
+  } catch (error: unknown) {
     return {
       status: 500,
-      data: "error",
+      data: error as Error,
     };
   }
 };
 
-const patchUser = async (id: number, user: IUser) => {
+const patchUser = async (id: number, user: IUser): Promise<IUserResponse<IUser | Error>> => {
   try {
-    const result = await userRepository.patchUser(id, user);
+    const result: IUser = await userRepository.patchUser(id, user);
     return {
       status: 200,
       data: result,
     };
-  } catch (error) {
+  } catch (error: unknown) {
     return {
       status: 500,
-      data: "error",
+      data: error as Error,
     };
   }
 };
 
-const deleteUser = async (id: number) => {
+const deleteUser = async (id: number): Promise<IUserResponse<IUser | Error>> => {
   try {
-    const result = await userRepository.deleteUser(id);
+    const result: IUser = await userRepository.deleteUser(id);
     return {
       status: 200,
       data: result,
     };
-  } catch (error) {
+  } catch (error: unknown) {
     return {
       status: 500,
-      data: "error",
+      data: error as Error,
     };
   }
 };
