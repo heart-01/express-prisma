@@ -2,11 +2,20 @@ import express, { Router } from "express";
 import { validateSchemaMiddleware } from "../middlewares/validation";
 import { JOI_OPTIONS } from "../enums/joi.enum";
 import userValidator from "../validators/user.validator";
-import { getAllUsers, createUser, patchUser, deleteUser } from "../controllers/user.controller";
+import { getAllUsers, createUser, patchUser, deleteUser, getUserById } from "../controllers/user.controller";
 
 const userRouter: Router = express.Router();
 
 userRouter.get("/", getAllUsers);
+
+userRouter.get(
+  "/:id",
+  validateSchemaMiddleware({
+    option: JOI_OPTIONS.PARAMS,
+    schema: userValidator.getUserByIdParams,
+  }),
+  getUserById
+);
 
 userRouter.post(
   "/",

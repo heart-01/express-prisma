@@ -8,6 +8,11 @@ const getAllUsers = async (request: Request, response: Response): Promise<void> 
   response.status(result.status).send(result.data);
 };
 
+const getUserById = async (request: Request, response: Response): Promise<void> => {
+  const result: IUserResponse<IUser | Error> = await userService.getUserById(Number(request.params.id));
+  response.status(result.status).send(result.data);
+};
+
 const createUser = async (request: Request, response: Response): Promise<void> => {
   const userInput: IUser = request.body;
   const result: IUserResponse<IUser | Error> = await userService.createUser(userInput);
@@ -24,4 +29,4 @@ const deleteUser = async (request: Request, response: Response): Promise<void> =
   response.status(result.status).send(result.data);
 };
 
-export { getAllUsers, createUser, patchUser, deleteUser };
+export { getAllUsers, getUserById, createUser, patchUser, deleteUser };

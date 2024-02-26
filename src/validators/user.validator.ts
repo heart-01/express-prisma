@@ -1,5 +1,9 @@
 import joi from "joi";
 
+const getUserByIdParams: joi.ObjectSchema = joi.object().keys({
+  id: joi.string().required(),
+});
+
 const createUser: joi.ObjectSchema = joi.object().keys({
   email: joi.string().email().required(),
   firstName: joi.string().min(3).required(),
@@ -32,4 +36,4 @@ const deleteUserParams: joi.ObjectSchema = joi.object().keys({
   id: joi.string().required(),
 });
 
-export default { createUser, patchUserParams, patchUserBody, deleteUserParams };
+export default { createUser, getUserByIdParams, patchUserParams, patchUserBody, deleteUserParams };

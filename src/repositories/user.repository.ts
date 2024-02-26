@@ -7,6 +7,10 @@ const getAllUsers = async (): Promise<IUser[]> => {
   return (await prisma.user.findMany()) as IUser[];
 };
 
+const getUserById = async (id: number): Promise<IUser> => {
+  return (await prisma.user.findUnique({ where: { id } })) as IUser;
+};
+
 const createUser = async (user: IUser): Promise<IUser> => {
   return (await prisma.user.create({ data: user })) as IUser;
 };
@@ -19,4 +23,4 @@ const deleteUser = async (id: number): Promise<IUser> => {
   return (await prisma.user.delete({ where: { id } })) as IUser;
 };
 
-export default { getAllUsers, createUser, patchUser, deleteUser };
+export default { getAllUsers, getUserById, createUser, patchUser, deleteUser };

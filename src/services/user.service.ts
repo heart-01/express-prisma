@@ -17,6 +17,25 @@ const getAllUsers = async (): Promise<IUserResponse<IUser[] | Error>> => {
   }
 };
 
+const getUserById = async (id: number): Promise<IUserResponse<IUser | Error>> => {
+  try {
+    const result: IUser = await userRepository.getUserById(id);
+    if (!result) {
+      throw new Error(`User with id ${id} not found`);
+    }
+
+    return {
+      status: 200,
+      data: result,
+    };
+  } catch (error: unknown) {
+    return {
+      status: 500,
+      data: error as Error,
+    };
+  }
+};
+
 const createUser = async (user: IUser): Promise<IUserResponse<IUser | Error>> => {
   try {
     const result: IUser = await userRepository.createUser(user);
@@ -62,4 +81,4 @@ const deleteUser = async (id: number): Promise<IUserResponse<IUser | Error>> => 
   }
 };
 
-export default { getAllUsers, createUser, patchUser, deleteUser };
+export default { getAllUsers, getUserById, createUser, patchUser, deleteUser };
